@@ -60,15 +60,16 @@ public class UserService implements UserDetailsService {
         return userDAO.saveOrUpdateUser(newUser);
     }
 
-    public User signIn(SigninRequest request) {
-        Authentication authentication = new UsernamePasswordAuthenticationToken(request.username(), request.password());
-        Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String username = (String) authentication.getPrincipal();
-        Optional<User> user = userDAO.getUserByUsername(username);
-        if (user.isEmpty()) {
+    public User signIn(SigninRequest request) throws EntityNotFoundException {
+
+        Optional<User> user = userDAO.getUserByUsername(request.username());
+        if (user == null) {
             throw new EntityNotFoundException("User not found");
         } else {
+            Authentication authentication = new UsernamePasswordAuthenticationToken(request.username(), request.password());
+            Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String username = (String) authentication.getPrincipal();
             return user.get();
         }
     }

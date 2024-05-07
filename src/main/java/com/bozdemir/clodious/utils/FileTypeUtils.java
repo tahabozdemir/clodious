@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class FileTypeUtils {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(FileTypeUtils.class);
 
     private final static String IMAGE_TYPE = "image/";

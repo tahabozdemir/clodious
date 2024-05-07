@@ -26,10 +26,10 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@Valid @RequestBody SignupRequest signupRequest) {
-
         if (userService.exitsUser(signupRequest.username(), signupRequest.password())) {
-
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse("Username already exists"));
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(new MessageResponse("Username already exists"));
         } else {
             Boolean isCreated = userService.createUser(signupRequest);
             if (isCreated) {
@@ -58,7 +58,7 @@ public class UserController {
             logger.info("Attempt login: {}", signinRequest.username());
         }
         return ResponseEntity
-                .ok()
+                .status(HttpStatus.UNAUTHORIZED)
                 .body("User not found");
     }
 }

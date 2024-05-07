@@ -13,11 +13,11 @@ public record SignupRequest(String username,
 
     public static final class SignupRequestBuilder {
         private String username;
+        @JsonIgnore
+        private String password;
         private String name;
         private String surname;
         private String email;
-        @JsonIgnore
-        private String password;
         private Set<ERole> roles;
 
         private SignupRequestBuilder() {
