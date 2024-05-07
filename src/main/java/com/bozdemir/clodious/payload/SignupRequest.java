@@ -1,6 +1,7 @@
 package com.bozdemir.clodious.payload;
 
 import com.bozdemir.clodious.model.ERole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Set;
 
@@ -15,6 +16,7 @@ public record SignupRequest(String username,
         private String name;
         private String surname;
         private String email;
+        @JsonIgnore
         private String password;
         private Set<ERole> roles;
 
