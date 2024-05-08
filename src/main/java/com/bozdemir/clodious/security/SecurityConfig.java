@@ -59,6 +59,7 @@ public class SecurityConfig {
                                 .requestMatchers("/users/**").hasAnyRole("USER", "ADMIN")
                 )
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .logout(logout -> logout.deleteCookies("JSESSIONID"))
                 .httpBasic(Customizer.withDefaults());
         return security.build();
     }

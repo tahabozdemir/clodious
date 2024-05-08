@@ -1,4 +1,4 @@
-package com.bozdemir.clodious.payload;
+package com.bozdemir.clodious.payload.response;
 
 public record UserResponse(Long id, String email, String username, String name, String surname) {
 

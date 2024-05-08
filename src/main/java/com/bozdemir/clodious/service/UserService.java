@@ -3,8 +3,8 @@ package com.bozdemir.clodious.service;
 import com.bozdemir.clodious.DAO.UserDAO;
 import com.bozdemir.clodious.model.ERole;
 import com.bozdemir.clodious.model.User;
-import com.bozdemir.clodious.payload.SigninRequest;
-import com.bozdemir.clodious.payload.SignupRequest;
+import com.bozdemir.clodious.payload.request.SigninRequest;
+import com.bozdemir.clodious.payload.request.SignupRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -61,15 +61,13 @@ public class UserService implements UserDetailsService {
     }
 
     public User signIn(SigninRequest request) throws EntityNotFoundException {
-
         Optional<User> user = userDAO.getUserByUsername(request.username());
         if (user == null) {
             throw new EntityNotFoundException("User not found");
         } else {
             Authentication authentication = new UsernamePasswordAuthenticationToken(request.username(), request.password());
             Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            String username = (String) authentication.getPrincipal();
+            SecurityContextHolder.getContext().setAuthentication(auth);
             return user.get();
         }
     }

@@ -1,5 +1,5 @@
 package com.bozdemir.clodious.controller;
-import com.bozdemir.clodious.payload.FileResponse;
+import com.bozdemir.clodious.payload.response.FileResponse;
 import com.bozdemir.clodious.service.FileService;
 import com.bozdemir.clodious.service.UserService;
 import org.junit.jupiter.api.Assertions;

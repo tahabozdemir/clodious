@@ -1,4 +1,4 @@
-package com.bozdemir.clodious.payload;
+package com.bozdemir.clodious.payload.request;
 
 import com.bozdemir.clodious.model.ERole;
 import com.fasterxml.jackson.annotation.JsonIgnore;

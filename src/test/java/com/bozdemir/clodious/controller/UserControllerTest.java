@@ -1,9 +1,9 @@
 package com.bozdemir.clodious.controller;
 
 import com.bozdemir.clodious.model.User;
-import com.bozdemir.clodious.payload.SigninRequest;;
-import com.bozdemir.clodious.payload.SignupRequest;
-import com.bozdemir.clodious.payload.UserResponse;
+import com.bozdemir.clodious.payload.request.SigninRequest;;
+import com.bozdemir.clodious.payload.request.SignupRequest;
+import com.bozdemir.clodious.payload.response.UserResponse;
 import com.bozdemir.clodious.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import static org.mockito.Mockito.when;
 
-public class TestUserController {
+public class UserControllerTest{
     @Mock
     private UserService userService;
     @InjectMocks

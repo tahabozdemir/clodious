@@ -5,8 +5,7 @@ import com.bozdemir.clodious.DAO.FileDAO;
 import com.bozdemir.clodious.DAO.UserDAO;
 import com.bozdemir.clodious.model.FileMeta;
 import com.bozdemir.clodious.model.User;
-import com.bozdemir.clodious.payload.FileResponse;
-import com.bozdemir.clodious.utils.FileTypeUtils;
+import com.bozdemir.clodious.payload.response.FileResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -43,7 +42,7 @@ public class FileService {
     }
 
     public Resource downloadFile(String username, String fileName, String directoryPath) throws MalformedURLException {
-        Path path = Paths.get(directoryPath + username + "\\" + fileName);
+        Path path = Paths.get(directoryPath + username + File.separator + fileName);
         return new UrlResource(path.toUri());
     }
 
@@ -68,7 +67,7 @@ public class FileService {
     public Boolean deleteFile(String username, String fileName, String directoryPath) throws IOException {
         Optional<User> user = userDAO.getUserByUsername(username);
         Boolean success = false;
-        Path path = Paths.get(directoryPath + username + "\\" + fileName);
+        Path path = Paths.get(directoryPath + username + File.separator + fileName);
         Optional<FileMeta> fileMeta = fileDAO.getFileByName(fileName);
         if (fileMeta.isPresent()) {
             Files.delete(path);

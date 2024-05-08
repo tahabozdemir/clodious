@@ -10,6 +10,7 @@ argfile*
 activemq-data/
 classes/
 /logs
+/Users
 # Log files
 jxl.log
 jmx.log
