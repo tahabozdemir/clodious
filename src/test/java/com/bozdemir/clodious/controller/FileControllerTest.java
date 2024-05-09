@@ -45,7 +45,7 @@ class FileControllerTest {
         ResponseEntity<String> response = fileController.upload(username, file);
         String[] success = response.getBody().split(":");
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-        Assertions.assertEquals("Dosya başarıyla yüklendi", success[0]);
+        Assertions.assertEquals("File successfully uploaded", success[0]);
     }
 
     @Test
