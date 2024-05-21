@@ -20,7 +20,7 @@ public class User implements UserDetails {
     private Long id;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<FileMeta> files;
+    private List<FileData> files;
 
     @NotBlank
     @Size(max = 20)
@@ -164,15 +164,15 @@ public class User implements UserDetails {
         this.surname = surname;
     }
 
-    public List<FileMeta> getFiles() {
+    public List<FileData> getFiles() {
         return files;
     }
 
-    public void setFiles(List<FileMeta> files) {
+    public void setFiles(List<FileData> files) {
         this.files = files;
     }
 
-    public void addFile(FileMeta fileMeta) {
+    public void addFile(FileData fileMeta) {
         if (fileMeta == null) {
             files = new ArrayList<>();
         }
