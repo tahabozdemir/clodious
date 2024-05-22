@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign In Page</title>
+</head>
+<body>
+<form action="#" th:action="@{/auth/signin}" method="post" th:object="${signinRequest}">
+    <label for="username">Username: </label>
+    <input type="text" id="username" name="username" required="required" th:field="*{username}"/>
+
+    <br />
+
+    <label for="password">Password: </label>
+    <input type="password" id="password" name="password" required="required" th:field="*{password}"/>
+
+    <br />
+
+    <button type="submit">Sign In</button>
+</form>
+
+<div th:if="${error}" class="error">Invalid username or password. Please try again.</div>
+</body>
+</html>

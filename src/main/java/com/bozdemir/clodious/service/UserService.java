@@ -5,6 +5,9 @@ import com.bozdemir.clodious.model.ERole;
 import com.bozdemir.clodious.model.User;
 import com.bozdemir.clodious.payload.request.SigninRequest;
 import com.bozdemir.clodious.payload.request.SignupRequest;
+import com.bozdemir.clodious.security.SecurityConfig;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -76,5 +80,11 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userDAO.getUserByUsername(username);
         return user.orElseThrow(EntityNotFoundException::new);
+    }
+
+    public void signOut(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+        logoutHandler.logout(request, response, authentication);
+        SecurityContextHolder.clearContext();
     }
 }

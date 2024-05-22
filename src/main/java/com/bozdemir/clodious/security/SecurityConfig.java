@@ -51,15 +51,22 @@ public class SecurityConfig {
                 .headers(x -> x.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .formLogin(AbstractHttpConfigurer::disable)
+                .formLogin(x -> x.loginPage("/auth/signin")
+                        .defaultSuccessUrl("/api/v1/files")
+                        .failureUrl("/auth/signin")
+                )
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/api/v1/**").permitAll()
-                                .requestMatchers("/api/users/**").permitAll()
-                                .requestMatchers("/users/**").hasAnyRole("USER", "ADMIN")
+                        auth.requestMatchers("/**").permitAll()
+                                .requestMatchers("/api/v1/**").authenticated()
+                                .requestMatchers("/api/v1/**").hasAnyRole("USER", "ADMIN")
                 )
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
-                .logout(logout -> logout.deleteCookies("JSESSIONID"))
+                .logout(logout ->
+                        logout.deleteCookies("JSESSIONID")
+                                .logoutUrl("/auth/signout")
+                                .logoutSuccessUrl("/auth/signin")
+                                .invalidateHttpSession(true)
+                )
                 .httpBasic(Customizer.withDefaults());
         return security.build();
     }
