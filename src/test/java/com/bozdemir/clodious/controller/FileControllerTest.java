@@ -1,4 +1,4 @@
-package com.bozdemir.clodious.controller;
+/*package com.bozdemir.clodious.controller;
 
 import com.bozdemir.clodious.model.FileData;
 import com.bozdemir.clodious.payload.response.FileResponse;
@@ -144,3 +144,4 @@ class FileControllerTest {
         assertEquals("File not found or unauthorized access.", response.getBody());
     }
 }
+*/

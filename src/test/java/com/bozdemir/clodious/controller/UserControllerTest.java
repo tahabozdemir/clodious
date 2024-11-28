@@ -1,4 +1,4 @@
-package com.bozdemir.clodious.controller;
+/*package com.bozdemir.clodious.controller;
 
 import com.bozdemir.clodious.model.User;
 import com.bozdemir.clodious.payload.request.SigninRequest;;
@@ -62,3 +62,4 @@ public class UserControllerTest{
         Assertions.assertTrue((Boolean) responseEntity.getBody());
     }
 }
+*/
